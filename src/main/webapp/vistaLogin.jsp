@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Iniciar Sesion</title>
 <%@include file ="assets/html/importHead.html" %>
 <link rel ="stylesheet" href="assets/css/login.css">
 </head>
