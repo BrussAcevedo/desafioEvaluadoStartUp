@@ -3,6 +3,7 @@ package cl.desafioLatam.servicios;
 
 
 
+import cl.desafioLatam.ConnectionBBDD.ConnectionBBDD;
 import cl.desafioLatam.DAO.UsuarioDAO;
 import cl.desafioLatam.DTO.UsuarioDTO;
 import cl.desafioLatam.Enum.EstadoReg;
@@ -27,10 +28,11 @@ public class ServicioUsuario {
 					return EstadoReg.INGRESADO;
 				}
 			}else {
+				ConnectionBBDD.closeConnection();
 				return EstadoReg.EXISTENTE;
 			}		
 		}		
-
+		ConnectionBBDD.closeConnection();
 		return EstadoReg.NO_INGRESADO;
 		
 		
@@ -43,10 +45,11 @@ public class ServicioUsuario {
 		
 		if (estado == EstadoSQL.CONDICION_EXITOSA) {
 			System.out.println("usuario Encontrado");
+			ConnectionBBDD.closeConnection();
 			return true;
 		}
 		System.out.println("usuario no encontrado");
-		
+		ConnectionBBDD.closeConnection();
 		return false;
 	}
 	
@@ -54,8 +57,10 @@ public class ServicioUsuario {
 		UsuarioDTO usuarioEncontrado = new UsuarioDTO();
 		usuarioDao.findByMail(correoUsuario, usuarioEncontrado);
 		if (usuarioEncontrado !=null) {
+			ConnectionBBDD.closeConnection();
 			return usuarioEncontrado;
 		}
+		ConnectionBBDD.closeConnection();
 		return usuarioEncontrado;
 		
 	}

@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cl.desafioLatam.DTO.DireccionDTO;
+import cl.desafioLatam.DTO.RolUsuarioDTO;
 import cl.desafioLatam.DTO.UsuarioDTO;
 import cl.desafioLatam.servicios.ServicioCuenta;
+import cl.desafioLatam.servicios.ServicioDireccion;
+import cl.desafioLatam.servicios.ServicioRolUsuario;
 import cl.desafioLatam.servicios.ServicioUsuario;
 
 /**
@@ -46,17 +50,40 @@ public class LoginControlador extends HttpServlet {
 		ServicioCuenta sc = new ServicioCuenta();
 		ServicioUsuario su = new ServicioUsuario();
 		UsuarioDTO usuarioEncontrado = new UsuarioDTO();
+		DireccionDTO direccionEncontrada = new DireccionDTO();
+		RolUsuarioDTO rolUsuarioEncontrada = new RolUsuarioDTO();
+		
 		
 		HttpSession nuevaSesion = request.getSession();
 		
 		if(sc.loginUsuario(correoLogin, passwordLogin)) {
-			System.out.println("flag0");
+
 			usuarioEncontrado = su.encontrarUsuario(correoLogin);
 				if(usuarioEncontrado != null) {
 					
 					nuevaSesion.setAttribute("userID", usuarioEncontrado.getId());
-					nuevaSesion.setAttribute("userID", usuarioEncontrado.getNick());
-					nuevaSesion.setAttribute("userID", usuarioEncontrado.getCorreo());
+					nuevaSesion.setAttribute("userNick", usuarioEncontrado.getNick());
+					nuevaSesion.setAttribute("userMail", usuarioEncontrado.getCorreo());
+					nuevaSesion.setAttribute("userName", usuarioEncontrado.getNombre());
+					nuevaSesion.setAttribute("userWeight", usuarioEncontrado.getPeso());
+					nuevaSesion.setAttribute("userMail", usuarioEncontrado.getCorreo());
+					nuevaSesion.setAttribute("userCreateDate", usuarioEncontrado.getCreatedAt());
+					nuevaSesion.setAttribute("userUpdateDate", usuarioEncontrado.getUpdateAt());
+			
+					int idUsuario = sc.findIdByMail(usuarioEncontrado.getCorreo());
+					
+					ServicioDireccion sd = new ServicioDireccion();
+					direccionEncontrada = sd.findAdressByUserId(idUsuario);
+					
+					ServicioRolUsuario sr = new ServicioRolUsuario();
+					rolUsuarioEncontrada = sr.findRolByUserId(idUsuario);
+					
+					nuevaSesion.setAttribute("userAddressStreet", direccionEncontrada.getNombre());
+					nuevaSesion.setAttribute("userAddressNumber", direccionEncontrada.getNumeracion());
+					
+					nuevaSesion.setAttribute("userIdRol", rolUsuarioEncontrada.getRolId());
+					
+					response.sendRedirect("vistaHomeUsuario.jsp");
 					
 				}else {
 					String errorBBDD = "Error inesperado a la conexion de base de datos.";

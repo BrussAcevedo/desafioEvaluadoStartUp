@@ -21,7 +21,6 @@ public class ConnectionBBDD {
 			connection = DriverManager.getConnection(url, user, password);
 			
 			if (connection != null) {
-				System.out.println("Conexion a la base de datos con éxito.");
 				return connection;
 			
 			
@@ -38,6 +37,15 @@ public class ConnectionBBDD {
 		
 		
 		return null;
+	}
+	
+	
+	public static void closeConnection () {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	

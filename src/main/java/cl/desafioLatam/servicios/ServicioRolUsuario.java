@@ -1,5 +1,6 @@
 package cl.desafioLatam.servicios;
 
+import cl.desafioLatam.ConnectionBBDD.ConnectionBBDD;
 import cl.desafioLatam.DAO.RolUsuarioDAO;
 import cl.desafioLatam.DTO.RolUsuarioDTO;
 import cl.desafioLatam.Enum.EstadoReg;
@@ -19,10 +20,12 @@ public class ServicioRolUsuario {
 				 EstadoSQL estadoSql =  rolUsuarioDao.save(nuevoRolUsuario);
 				 
 				 if (estadoSql == EstadoSQL.EXITO) {
+					 ConnectionBBDD.closeConnection();
 					 return EstadoReg.INGRESADO;
 				 }				
 			}		
 		}
+		ConnectionBBDD.closeConnection();
 		return EstadoReg.NO_INGRESADO;
 	}
 	
@@ -32,9 +35,19 @@ public class ServicioRolUsuario {
 		EstadoSQL estado = rolUsuarioDao.findById(3, rolUsuario);
 		
 		if (estado == EstadoSQL.CONDICION_EXITOSA) {
+			ConnectionBBDD.closeConnection();
 			return true;
 		}	
+		ConnectionBBDD.closeConnection();
 		return false;
+	}
+	
+	public RolUsuarioDTO findRolByUserId(int idUsuario) {
+		RolUsuarioDTO rolTemp = new RolUsuarioDTO(0, 0);
+		EstadoSQL estado = rolUsuarioDao.findById(idUsuario, rolTemp);
+		ConnectionBBDD.closeConnection();
+			return rolTemp;		
+		
 	}
 	
 	

@@ -1,6 +1,7 @@
 package cl.desafioLatam.servicios;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import cl.desafioLatam.ConnectionBBDD.ConnectionBBDD;
 import cl.desafioLatam.DAO.UsuarioDAO;
 
 public class ServicioSeguridad {
@@ -16,7 +17,7 @@ public class ServicioSeguridad {
 		UsuarioDAO usuarioDao = new UsuarioDAO();
 		usuarioDao.validatePassword(correo, passwordIngresada);
 		
-		
+		ConnectionBBDD.closeConnection();
 		return false;
 	}
 	

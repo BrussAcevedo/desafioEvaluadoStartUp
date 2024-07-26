@@ -2,6 +2,7 @@ package cl.desafioLatam.servicios;
 
 
 
+import cl.desafioLatam.ConnectionBBDD.ConnectionBBDD;
 import cl.desafioLatam.DAO.UsuarioDAO;
 import cl.desafioLatam.DAO.imp.UsuarioDaoImp;
 import cl.desafioLatam.DTO.DireccionDTO;
@@ -53,8 +54,7 @@ public class ServicioCuenta {
 			}		
 			
 		}
-	
-		
+		ConnectionBBDD.closeConnection();	
 	}
 	
 	public boolean loginUsuario (String correoLogin, String passwordLogin) {
@@ -62,8 +62,10 @@ public class ServicioCuenta {
 		
 		EstadoSQL estado = usuarioDao.validatePassword(correoLogin, passwordLogin);
 		if(estado == EstadoSQL.CONDICION_EXITOSA) {
+			ConnectionBBDD.closeConnection();
 			return true;
 		}
+		ConnectionBBDD.closeConnection();
 		return false;
 		
 	}
@@ -77,9 +79,11 @@ public class ServicioCuenta {
 		EstadoSQL estado = usuarioDao.findByMail(correoNuevoUsuario, usuarioTemp);
 		if (estado == EstadoSQL.CONDICION_EXITOSA) {
 			System.out.println("UsuarioEncontrado: " + estado.getMensaje());
+			ConnectionBBDD.closeConnection();
 			return usuarioTemp.getId();
 		}else {
 			System.out.println(estado.getMensaje());
+			ConnectionBBDD.closeConnection();
 			return 0;
 		}
 		
