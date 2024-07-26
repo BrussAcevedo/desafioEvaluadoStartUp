@@ -21,11 +21,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-	//	ServicioCuenta sc = new ServicioCuenta();
-		//UsuarioDTO usuario = new UsuarioDTO(0, "hola@gmail.com", null, "holaxD", "holo", "123456", 5, null);
-		//sc.registroDatos(usuario, null);
-
-		//sc.loginUsuario("hola@gmail.com", "12345");
+	
 	}
 
 }

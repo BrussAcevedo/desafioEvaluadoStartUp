@@ -2,7 +2,7 @@ package cl.desafioLatam.Enum;
 
 public enum EstadoReg {
 
-	INGRESADO ("Datos Ingresador Exitosamente."),
+	INGRESADO ("Datos Ingresado Exitosamente."),
 	NO_INGRESADO ("Datos no ingresados"),
 	EXISTENTE ("Los datos ya existen");
 	

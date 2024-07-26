@@ -3,6 +3,7 @@ package cl.desafioLatam.servicios;
 
 
 import cl.desafioLatam.DAO.UsuarioDAO;
+import cl.desafioLatam.DAO.imp.UsuarioDaoImp;
 import cl.desafioLatam.DTO.DireccionDTO;
 import cl.desafioLatam.DTO.RolUsuarioDTO;
 import cl.desafioLatam.DTO.UsuarioDTO;
@@ -20,6 +21,7 @@ public class ServicioCuenta {
 	public void registroDatos (UsuarioDTO datosUsuario, DireccionDTO datosDireccion) {
 		RolUsuarioDTO rolUsuario = new RolUsuarioDTO(datosUsuario.getId(), 1);
 		
+		
 		if (datosUsuario != null) {
 			if (!datosUsuario.getCorreo().isEmpty() && !datosUsuario.getPassword().isEmpty()) {
 				
@@ -31,8 +33,17 @@ public class ServicioCuenta {
 				datosUsuario.setUpdateAt(fechaHoraActual);
 				
 				EstadoReg estadoUsReg = servicioUsuario.NuevoUsuario(datosUsuario);
-				EstadoReg estadoDirReg = servicioDireccion.nuevaDireccion(datosDireccion);
-				EstadoReg estadoRolReg = servicioRol.nuevoRol(rolUsuario);
+				EstadoReg estadoDirReg = EstadoReg.NO_INGRESADO;
+				EstadoReg estadoRolReg = EstadoReg.NO_INGRESADO;
+				
+				if (estadoUsReg == EstadoReg.INGRESADO) {
+
+					datosDireccion.setUsuarioId(findIdByMail(datosUsuario.getCorreo()));
+						estadoDirReg = servicioDireccion.nuevaDireccion(datosDireccion);
+					rolUsuario.setUsuarioId(findIdByMail(datosUsuario.getCorreo()));
+						estadoRolReg = servicioRol.nuevoRol(rolUsuario);
+				}
+				
 				
 				String estadoGralReg = String.format("Resumen registro:\r\n"
 											+ "Registro del usuario: %s\r\n"
@@ -55,7 +66,20 @@ public class ServicioCuenta {
 	
 	
 	
-	
+	public int findIdByMail(String correoNuevoUsuario) {
+		UsuarioDAO usuarioDao = new UsuarioDAO();
+		UsuarioDTO usuarioTemp = new UsuarioDTO();
+		
+		EstadoSQL estado = usuarioDao.findByMail(correoNuevoUsuario, usuarioTemp);
+		if (estado == EstadoSQL.CONDICION_EXITOSA) {
+			System.out.println("UsuarioEncontrado: " + estado.getMensaje());
+			return usuarioTemp.getId();
+		}else {
+			System.out.println(estado.getMensaje());
+			return 0;
+		}
+		
+	}
 	
 	
 	

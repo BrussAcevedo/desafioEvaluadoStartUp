@@ -22,8 +22,10 @@ public class ServicioUsuario {
 			String correo = nuevoUsuario.getCorreo();
 			if(!existenciaUsuario(correo)) {
 				estadoSql= usuarioDao.save(nuevoUsuario);
-			
-				if (estadoSql == EstadoSQL.CONDICION_EXITOSA) {				
+				
+				System.out.println(estadoSql.getMensaje());
+				
+				if (estadoSql == EstadoSQL.EXITO) {				
 					return EstadoReg.INGRESADO;
 				}
 			}else {
@@ -48,5 +50,11 @@ public class ServicioUsuario {
 		return false;
 	}
 	
+	private int findIdUsuario (String correoUsuario) {
+		
+		
+		
+		return 0;
+	}
 	
 }
