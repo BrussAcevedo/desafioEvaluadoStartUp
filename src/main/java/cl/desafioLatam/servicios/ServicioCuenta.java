@@ -57,11 +57,15 @@ public class ServicioCuenta {
 		
 	}
 	
-	public void loginUsuario (String correoLogin, String passwordLogin) {
+	public boolean loginUsuario (String correoLogin, String passwordLogin) {
 		UsuarioDAO usuarioDao = new UsuarioDAO();
 		
 		EstadoSQL estado = usuarioDao.validatePassword(correoLogin, passwordLogin);
-		System.out.println(estado.getMensaje());
+		if(estado == EstadoSQL.CONDICION_EXITOSA) {
+			return true;
+		}
+		return false;
+		
 	}
 	
 	

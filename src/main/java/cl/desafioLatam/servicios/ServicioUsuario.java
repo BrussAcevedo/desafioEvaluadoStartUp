@@ -2,10 +2,8 @@ package cl.desafioLatam.servicios;
 
 
 
-import cl.desafioLatam.DAO.RolUsuarioDAO;
+
 import cl.desafioLatam.DAO.UsuarioDAO;
-import cl.desafioLatam.DTO.DireccionDTO;
-import cl.desafioLatam.DTO.RolUsuarioDTO;
 import cl.desafioLatam.DTO.UsuarioDTO;
 import cl.desafioLatam.Enum.EstadoReg;
 import cl.desafioLatam.Enum.EstadoSQL;
@@ -44,17 +42,25 @@ public class ServicioUsuario {
 		EstadoSQL estado = usuarioDao.findByMail(correo, usuarioTemp);
 		
 		if (estado == EstadoSQL.CONDICION_EXITOSA) {
+			System.out.println("usuario Encontrado");
 			return true;
 		}
+		System.out.println("usuario no encontrado");
 		
 		return false;
 	}
 	
-	private int findIdUsuario (String correoUsuario) {
+	public UsuarioDTO encontrarUsuario (String correoUsuario) {
+		UsuarioDTO usuarioEncontrado = new UsuarioDTO();
+		usuarioDao.findByMail(correoUsuario, usuarioEncontrado);
+		if (usuarioEncontrado !=null) {
+			return usuarioEncontrado;
+		}
+		return usuarioEncontrado;
 		
-		
-		
-		return 0;
 	}
+	
+	
+	
 	
 }

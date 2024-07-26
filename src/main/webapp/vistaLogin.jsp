@@ -27,13 +27,13 @@
 		<div class="contenedorInterno">
 		
 		<div class ="contenedorDato pb-3">
-			<input type="text" placeholder="Correo Electronico" required>
+			<input type="text" placeholder="Correo Electronico" name ="correoLoginTxt" required>
 			<i class="fa-solid fa-user icon1"></i>
 		</div>
 		
 		
 		<div class ="contenedorDato">
-			<input type="password" placeholder="Contraseña" required>
+			<input type="password" placeholder="Contraseña" name ="passwordLoginTxt" required>
 			<i class="fa-solid fa-key icon2"></i>
 		</div>
 		

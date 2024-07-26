@@ -111,9 +111,9 @@ public class UsuarioDAO implements UsuarioDaoImp{
 					BCrypt.Result resultPass = BCrypt.verifyer().verify(password.toCharArray(), rs.getString(2));
 					boolean validacion = resultPass.verified;
 					if (validacion == true) {
-						System.out.println("exito");
+						return EstadoSQL.CONDICION_EXITOSA;
 					}else {
-						System.out.println("Sin Exito");
+						return EstadoSQL.CONDICION_NO_EXITOSA;
 					}
 				}
 				
