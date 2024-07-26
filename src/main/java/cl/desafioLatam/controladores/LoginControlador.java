@@ -94,9 +94,8 @@ public class LoginControlador extends HttpServlet {
 		}else {
 			
 			String usuarioIncorrectoMsg = "Usuario y/o Contraseña incorrecto(s). Porfavor, Intentelo denuevo.";
-			request.setAttribute("UsuarioIncorrecto", usuarioIncorrectoMsg);
+			request.setAttribute("usuarioIncorrecto", usuarioIncorrectoMsg);
 			request.getRequestDispatcher("vistaLogin.jsp").forward(request, response);
-			System.out.println("flag2");
 		}
 		
 	}

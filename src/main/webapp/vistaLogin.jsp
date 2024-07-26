@@ -37,7 +37,7 @@
 			<i class="fa-solid fa-key icon2"></i>
 		</div>
 		
-		<div class ="recuperar-recordar pt-1">
+		<div class ="recuperar-recordar pt-1 pb-2">
 			<input type ="checkbox" name ="action" value ="recordar">Recordar Contraseña
 			<a href="LoginControlador?action = recuperar">¿Olvidaste tu Contraseña?</a>
 		</div>
@@ -52,13 +52,16 @@
 		</div>
 		
 		</div>
-
 	</form>
-
 </div>
-
 </div>
-	
+					<%String usuarioIncorrectoMsj = (String)request.getAttribute("usuarioIncorrecto"); %>
+		<%if(usuarioIncorrectoMsj != null){ %>
+		<div class ="usuario-contraseña-error" style="width 200px;">
+			<p>El correo y/o contraseña son incorrectas. Porfavor intentalo denuevo.</p>
+		</div>
+			
+		<%} %>
 
 
 
