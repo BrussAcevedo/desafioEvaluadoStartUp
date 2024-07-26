@@ -39,7 +39,7 @@
 			<p><i class="fa-solid fa-scale-balanced"></i> Peso: ${userWeight} kg</p>
 			<p><i class="fa-regular fa-address-book"></i> Direccion: ${userAddressStreet}, #${userAddressNumber} </p>
 	 	</div>
-	 	<div class="col-6 text-center align-items-center">
+	 	<div class="col-6 d-flex align-items-center justify-content-center">
 	 		<img class ="w-50" alt="imgPerfil" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png">
 	 	</div>
 	 	</div>
