@@ -52,3 +52,13 @@ ul, li{
 	
 	list-style: none;
 }
+
+.contenedor-form{
+	margin-top:30px;
+	margin-bottom:50px;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	border: none;
+	border: 2px solid rgb( 61, 102, 137);
+	border-radius: 20px;
+}

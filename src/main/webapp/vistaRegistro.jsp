@@ -12,7 +12,7 @@
 <body>
 
 	<%@include file="assets/html/navbar.html"%>
-
+<div class="contenedor-form container">
 	<form action="RegistroControlador" method="post">
 		<div class="row container content">
 
@@ -69,7 +69,7 @@
 		</div>
 	</form>
 
-
+</div>
 
 
 
